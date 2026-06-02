@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ahmed Ibrahim — Senior Software Full Stack PHP / Laravel Developer</title>
+  <meta name="description" content="Ahmed Ibrahim — Senior Software Full Stack PHP & Laravel Developer based in Cairo, Egypt. Building robust web applications, ERP systems, and APIs." />
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:        #0b0d12;
+      --bg-soft:   #11141c;
+      --card:      #141821;
+      --card-2:    #181d28;
+      --line:      #232938;
+      --text:      #e7eaf0;
+      --muted:     #8a91a3;
+      --muted-2:   #5c6170;
+      --accent:    #f9b234;     /* warm amber */
+      --accent-2:  #38d39f;     /* mint */
+      --accent-dim:#3a2d12;
+      --display:   'Sora', sans-serif;
+      --body:      'DM Sans', sans-serif;
+      --mono:      'JetBrains Mono', monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ambient background grid + glow */
+    body::before {
+      content: "";
+      position: fixed; inset: 0; z-index: -2;
+      background:
+        radial-gradient(900px 600px at 80% -10%, rgba(249,178,52,.10), transparent 60%),
+        radial-gradient(800px 500px at -10% 30%, rgba(56,211,159,.07), transparent 60%);
+      pointer-events: none;
+    }
+    body::after {
+      content: "";
+      position: fixed; inset: 0; z-index: -1;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 64px 64px;
+      opacity: .15;
+      mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 75%);
+      -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 75%);
+      pointer-events: none;
+    }
+
+    ::selection { background: var(--accent); color: #1a1304; }
+
+    h1,h2,h3,h4 { font-family: var(--display); letter-spacing: -.02em; }
+
+    .mono { font-family: var(--mono); }
+    .accent { color: var(--accent); }
+    .accent-2 { color: var(--accent-2); }
+    a { color: var(--accent); text-decoration: none; transition: .2s; }
+    a:hover { color: #ffd27a; }
+
+    /* section labels */
+    .label {
+      font-family: var(--mono);
+      font-size: .8rem;
+      color: var(--accent);
+      letter-spacing: .05em;
+      margin-bottom: .6rem;
+      display: inline-block;
+    }
+    .section { padding: 6.5rem 0; position: relative; }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 2.8rem;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background: rgba(11,13,18,.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: .3s;
+      padding: .9rem 0;
+    }
+    .navbar.scrolled { border-bottom-color: var(--line); }
+    .navbar-brand { font-family: var(--display); font-weight: 800; font-size: 1.15rem; color: var(--text) !important; }
+    .navbar-brand .dot { color: var(--accent); }
+    .navbar .nav-link {
+      color: var(--muted) !important;
+      font-family: var(--mono);
+      font-size: .85rem;
+      padding: .4rem .9rem !important;
+      transition: .2s;
+    }
+    .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--text) !important; }
+    .navbar .nav-link .idx { color: var(--accent); margin-right: .25rem; }
+    .navbar-toggler { border-color: var(--line); }
+    .navbar-toggler:focus { box-shadow: none; }
+
+    /* ===== HERO ===== */
+    .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 5rem; }
+    .hero .greet { font-family: var(--mono); color: var(--accent-2); font-size: .95rem; margin-bottom: 1rem; }
+    .hero h1 {
+      font-size: clamp(2.6rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.02;
+      margin-bottom: 1rem;
+    }
+    .hero .role {
+      font-size: clamp(1.3rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--muted);
+      min-height: 1.2em;
+      margin-bottom: 1.6rem;
+    }
+    .hero .role .type { color: var(--accent); }
+    .cursor { color: var(--accent); animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .hero p.lead-txt { color: var(--muted); max-width: 560px; font-size: 1.05rem; }
+
+    .btn-accent {
+      background: var(--accent); color: #1a1304; font-weight: 600;
+      border: none; padding: .7rem 1.5rem; border-radius: 10px; font-family: var(--mono); font-size: .9rem;
+      transition: .25s;
+    }
+    .btn-accent:hover { background: #ffd27a; transform: translateY(-2px); box-shadow: 0 12px 30px -10px rgba(249,178,52,.5); }
+    .btn-ghost {
+      background: transparent; color: var(--text); font-weight: 600;
+      border: 1px solid var(--line); padding: .7rem 1.5rem; border-radius: 10px; font-family: var(--mono); font-size: .9rem;
+      transition: .25s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .socials a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 10px;
+      color: var(--muted); transition: .25s;
+    }
+    .socials a:hover { color: var(--accent); border-color: var(--accent); transform: translateY(-3px); }
+
+    /* code card in hero */
+    .code-card {
+      background: linear-gradient(160deg, var(--card), var(--bg-soft));
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -25px rgba(0,0,0,.7);
+    }
+    .code-head { display: flex; align-items: center; gap: .5rem; padding: .8rem 1rem; border-bottom: 1px solid var(--line); background: var(--card-2); }
+    .code-head .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .code-head .fname { margin-left: auto; font-family: var(--mono); font-size: .78rem; color: var(--muted); }
+    .code-body { padding: 1.3rem 1.4rem; font-family: var(--mono); font-size: .85rem; line-height: 1.9; }
+    .code-body .ln { color: #444a5c; user-select: none; display: inline-block; width: 1.6em; }
+    .c-key { color: #ff7b9c; } .c-fn { color: var(--accent); } .c-str { color: var(--accent-2); } .c-com { color: #565c6e; } .c-var { color: #9aa3ff; }
+
+    /* ===== quick stats ===== */
+    .stat { border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; background: var(--card); height: 100%; transition: .25s; }
+    .stat:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .stat .num { font-family: var(--display); font-weight: 800; font-size: 2rem; color: var(--accent); }
+    .stat .lbl { color: var(--muted); font-size: .9rem; }
+
+    /* ===== about ===== */
+    .about-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 2rem; }
+
+    /* ===== skills ===== */
+    .skill-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.6rem; height: 100%;
+      transition: .3s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 20px 40px -25px rgba(249,178,52,.4); }
+    .skill-card .ic { font-size: 1.6rem; margin-bottom: .6rem; }
+    .skill-card h4 { font-size: 1.05rem; margin-bottom: 1rem; }
+    .chip {
+      display: inline-block; font-family: var(--mono); font-size: .78rem;
+      background: var(--card-2); border: 1px solid var(--line); color: var(--text);
+      padding: .32rem .7rem; border-radius: 8px; margin: 0 .35rem .5rem 0; transition: .2s;
+    }
+    .chip:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ===== timeline ===== */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content:""; position:absolute; left: 7px; top: 6px; bottom: 6px; width: 2px; background: var(--line); }
+    .tl-item { position: relative; padding-bottom: 2.4rem; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-item::before {
+      content:""; position:absolute; left: -2rem; top: 6px; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--bg); border: 3px solid var(--accent); box-shadow: 0 0 0 4px rgba(249,178,52,.12);
+    }
+    .tl-item.alt::before { border-color: var(--accent-2); box-shadow: 0 0 0 4px rgba(56,211,159,.12); }
+    .tl-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.5rem; transition: .25s; }
+    .tl-card:hover { border-color: var(--accent); transform: translateX(4px); }
+    .tl-date { font-family: var(--mono); font-size: .78rem; color: var(--accent); }
+    .tl-card h4 { font-size: 1.15rem; margin: .35rem 0 .1rem; }
+    .tl-card .co { color: var(--muted); font-size: .92rem; margin-bottom: .8rem; }
+    .tl-card ul { margin: 0; padding-left: 1.1rem; color: var(--muted); }
+    .tl-card ul li { margin-bottom: .35rem; }
+    .tl-card ul li::marker { color: var(--accent); }
+    .remote-badge { font-family: var(--mono); font-size: .68rem; border: 1px solid var(--line); color: var(--muted); padding: .12rem .5rem; border-radius: 6px; }
+
+    /* ===== projects ===== */
+    .proj-card {
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 1.6rem; height: 100%;
+      transition: .3s; display: flex; flex-direction: column;
+    }
+    .proj-card:hover { border-color: var(--accent); transform: translateY(-6px); box-shadow: 0 24px 50px -28px rgba(249,178,52,.4); }
+    .proj-card .pic { font-size: 1.5rem; color: var(--accent); margin-bottom: .8rem; }
+    .proj-card h4 { font-size: 1.1rem; margin-bottom: .5rem; }
+    .proj-card p { color: var(--muted); font-size: .9rem; flex: 1; }
+    .proj-tags { margin-top: .9rem; }
+
+    /* ===== education ===== */
+    .edu-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.5rem; height: 100%; transition: .25s; }
+    .edu-card:hover { border-color: var(--accent-2); }
+    .edu-card .yr { font-family: var(--mono); font-size: .78rem; color: var(--accent-2); }
+    .edu-card h4 { font-size: 1.05rem; margin: .3rem 0; }
+    .cert-pill { display:inline-block; background: var(--card-2); border:1px solid var(--line); border-radius: 999px; padding:.4rem .9rem; margin:0 .4rem .5rem 0; font-size:.85rem; color: var(--text); }
+
+    /* ===== languages ===== */
+    .lang-row { display:flex; justify-content: space-between; align-items:center; margin-bottom:.6rem; }
+    .lang-row .lvl { font-family: var(--mono); font-size:.8rem; color: var(--accent); }
+    .lang-bar { height: 8px; background: var(--card-2); border-radius: 99px; overflow: hidden; border:1px solid var(--line); }
+    .lang-bar > span { display:block; height:100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius:99px; width:0; transition: width 1.2s ease; }
+
+    /* ===== contact ===== */
+    .contact-card { background: linear-gradient(160deg, var(--card), var(--bg-soft)); border: 1px solid var(--line); border-radius: 22px; padding: 3rem 2rem; text-align:center; }
+    .contact-card h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+
+    footer { border-top: 1px solid var(--line); padding: 2rem 0; color: var(--muted); font-size: .88rem; }
+
+    /* back to top */
+    #toTop {
+      position: fixed; right: 22px; bottom: 22px; z-index: 50;
+      width: 46px; height: 46px; border-radius: 12px; border: 1px solid var(--line);
+      background: var(--card); color: var(--accent); display:grid; place-items:center;
+      opacity: 0; pointer-events: none; transition: .3s; cursor: pointer;
+    }
+    #toTop.show { opacity: 1; pointer-events: auto; }
+    #toTop:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    /* reveal animation */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 768px) {
+      .section { padding: 4.5rem 0; }
+      .hero { min-height: auto; padding: 7rem 0 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="nav">
+    <div class="container">
+      <a class="navbar-brand" href="#home">Ahmed Ibrahim<span class="dot">.</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navmenu">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="#about"><span class="idx">01.</span>About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills"><span class="idx">02.</span>Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#experience"><span class="idx">03.</span>Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects"><span class="idx">04.</span>Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#education"><span class="idx">05.</span>Education</a></li>
+          <li class="nav-item ms-lg-2"><a class="nav-link" href="#contact" style="color:var(--accent)!important;border:1px solid var(--line);border-radius:8px;">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="home">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-7">
+          <p class="greet">Hi, my name is</p>
+          <h1>Ahmed Ibrahim.</h1>
+          <div class="role">I build <span class="type" id="typed"></span><span class="cursor">_</span></div>
+          <p class="lead-txt">
+            Senior Software Full Stack <strong style="color:var(--text)">PHP / Laravel</strong> developer based in Cairo, Egypt.
+            I craft robust web applications, ERP & dashboard systems, and clean RESTful APIs — turning complex
+            requirements into seamless products.
+          </p>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a href="#projects" class="btn-accent">View my work →</a>
+            <a href="#contact" class="btn-ghost">Get in touch</a>
+          </div>
+          <div class="socials d-flex gap-2 mt-4">
+            <a href="mailto:a.ibrahim.software@gmail.com" title="Email" aria-label="Email">✉</a>
+            <a href="tel:+201112716862" title="Phone" aria-label="Phone">☎</a>
+            <a href="https://www.linkedin.com/in/ahmed-ibrahim-86a36b176/" title="LinkedIn" aria-label="LinkedIn">in</a>
+            <a href="https://github.com/Ahmedibrahim1998" title="GitHub" aria-label="GitHub" class="mono">{}</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="code-card reveal">
+            <div class="code-head">
+              <span class="dot" style="background:#ff5f56"></span>
+              <span class="dot" style="background:#ffbd2e"></span>
+              <span class="dot" style="background:#27c93f"></span>
+              <span class="fname">developer.php</span>
+            </div>
+            <div class="code-body">
+              <div><span class="ln">1</span><span class="c-key">class</span> <span class="c-fn">Developer</span> {</div>
+              <div><span class="ln">2</span>&nbsp;&nbsp;<span class="c-key">public</span> <span class="c-var">$name</span> = <span class="c-str">'Ahmed Ibrahim'</span>;</div>
+              <div><span class="ln">3</span>&nbsp;&nbsp;<span class="c-key">public</span> <span class="c-var">$role</span> = <span class="c-str">'Full Stack PHP'</span>;</div>
+              <div><span class="ln">4</span>&nbsp;&nbsp;<span class="c-key">public</span> <span class="c-var">$stack</span> = [</div>
+              <div><span class="ln">5</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">'Laravel'</span>, <span class="c-str">'React'</span>, <span class="c-str">'MySQL'</span>,</div>
+              <div><span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">'Vue'</span>, <span class="c-str">'Docker'</span>, <span class="c-str">'APIs'</span></div>
+              <div><span class="ln">7</span>&nbsp;&nbsp;];</div>
+              <div><span class="ln">8</span>&nbsp;&nbsp;<span class="c-key">public function</span> <span class="c-fn">code</span>() {</div>
+              <div><span class="ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-key">return</span> <span class="c-str">'clean &amp; scalable'</span>;</div>
+              <div><span class="ln">10</span>&nbsp;&nbsp;}</div>
+              <div><span class="ln">11</span>} <span class="c-com">// let's build something</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== STATS ===== -->
+  <section class="pb-2">
+    <div class="container">
+      <div class="row g-3" id="stats"></div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 reveal">
+          <span class="label">// 01. about me</span>
+          <h2 class="section-title">A developer who turns ideas into <span class="accent">working products.</span></h2>
+          <div class="about-card">
+            <p class="mb-3" style="color:var(--text)">
+              I'm a Senior Software Full Stack PHP developer with several years of hands-on experience building and
+              maintaining production web applications across legal-tech, healthcare ERP, e-commerce and delivery
+              platforms.
+            </p>
+            <p class="mb-3" style="color:var(--muted)">
+              My focus is writing clean, scalable code grounded in <strong style="color:var(--text)">SOLID principles,
+              design patterns and OOP</strong>. From designing database structures and crafting RESTful APIs to building
+              responsive dashboards from scratch, I enjoy owning features end-to-end.
+            </p>
+            <p class="mb-0" style="color:var(--muted)">
+              I'm always eager to learn new technologies and take on challenges that grow my abilities as a software engineer.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKILLS ===== -->
+  <section class="section" id="skills" style="background:var(--bg-soft)">
+    <div class="container">
+      <span class="label">// 02. tech stack</span>
+      <h2 class="section-title">Skills &amp; Tools</h2>
+      <div class="row g-4" id="skills-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section class="section" id="experience">
+    <div class="container">
+      <span class="label">// 03. where I've worked</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="row">
+        <div class="col-lg-10">
+          <div class="timeline" id="timeline"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROJECTS ===== -->
+  <section class="section" id="projects" style="background:var(--bg-soft)">
+    <div class="container">
+      <span class="label">// 04. things I've built</span>
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="row g-4" id="projects-grid"></div>
+    </div>
+  </section>
+
+  <!-- ===== EDUCATION ===== -->
+  <section class="section" id="education">
+    <div class="container">
+      <span class="label">// 05. learning</span>
+      <h2 class="section-title">Education &amp; Certifications</h2>
+      <div class="row g-4 mb-4" id="edu-grid"></div>
+
+      <div class="row g-4 mt-2">
+        <div class="col-lg-7 reveal">
+          <h4 class="mb-3" style="font-size:1.1rem">Other Certifications</h4>
+          <div id="certs"></div>
+        </div>
+        <div class="col-lg-5 reveal">
+          <h4 class="mb-3" style="font-size:1.1rem">Languages</h4>
+          <div id="languages"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 reveal">
+          <div class="contact-card">
+            <span class="label">// 06. what's next?</span>
+            <h2>Let's work together.</h2>
+            <p style="color:var(--muted);max-width:520px;margin:0 auto 1.8rem">
+              I'm currently open to new opportunities and interesting projects. Whether you have a question or
+              just want to say hi — my inbox is always open.
+            </p>
+            <a href="mailto:a.ibrahim.software@gmail.com" class="btn-accent d-inline-block mb-4">Say hello ✉</a>
+            <div class="d-flex flex-wrap justify-content-center gap-4 mono" style="font-size:.9rem;color:var(--muted)">
+              <span>📞 +20 111 271 6862</span>
+              <span>✉ a.ibrahim.software@gmail.com</span>
+              <span>📍 Cairo, Egypt</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container text-center">
+      <p class="mb-1 mono">Designed &amp; built with care · <span class="accent">Ahmed Ibrahim</span></p>
+      <p class="mb-0">© <span id="year"></span> · Software Full Stack PHP / Laravel Developer</p>
+    </div>
+  </footer>
+
+  <button id="toTop" aria-label="Back to top">↑</button>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+  /* =========================================================
+     DATA — edit here to update the whole site.
+     (Ready to swap for an API / JSON later → "dynamic")
+  ========================================================= */
+  const DATA = {
+    stats: [
+      { num: "4+",  lbl: "Years of experience" },
+      { num: "7",   lbl: "Companies & clients" },
+      { num: "10+", lbl: "Projects delivered" },
+      { num: "∞",   lbl: "Lines of clean code" },
+    ],
+
+    skills: [
+      { ic: "⚙️", title: "Languages & Frameworks",
+        items: ["PHP", "Laravel", "React.js", "Vue.js", "Angular", "JavaScript"] },
+      { ic: "🎨", title: "Frontend & Design",
+        items: ["HTML", "CSS", "Bootstrap", "jQuery", "Responsive UI"] },
+      { ic: "🗄️", title: "Databases",
+        items: ["MySQL", "MongoDB", "Oracle", "SQLite"] },
+      { ic: "🛠️", title: "Tools & DevOps",
+        items: ["Git", "GitHub Actions", "Docker", "Postman", "Ubuntu"] },
+      { ic: "🖧", title: "Server Administration",
+        items: ["Apache Server", "Redhat Linux"] },
+      { ic: "🧠", title: "Concepts & Methodologies",
+        items: ["SOLID", "Design Patterns", "OOP", "Algorithms", "Agile"] },
+    ],
+
+    experience: [
+      {
+        date: "Jan 2025 – Present", remote: true,
+        role: "Full Stack Developer (Laravel)", company: "Challenge Group Company",
+        points: [
+          "Building <strong>Law Mate</strong> — a comprehensive platform for online legal services with a robust management dashboard.",
+          "Developed a Requests system (type, location, urgency, status stages & expiry) and a Bids system for lawyers (Accepted / Completed / Expired).",
+          "Implemented real-time chat linking clients and lawyers per request.",
+          "Integrated payments & wallet using Laravel Wallet, withdrawals/deposits and Paymob payment gateway."
+        ]
+      },
+      {
+        date: "Dec 2024 – Dec 2025", remote: true,
+        role: "Full Stack Developer (Laravel)", company: "Pioneersa Company — ERP Clinic System",
+        points: [
+          "Developed the Medical Management module within an ERP clinic system.",
+          "Designed & built responsive, user-friendly dashboard pages.",
+          "Created interactive charts to visualize key business & medical data.",
+          "Built financial reports including returns & refunds; optimized DB structures and overall performance."
+        ]
+      },
+      {
+        date: "Sep 2022 – Dec 2023", remote: true,
+        role: "Full Stack Developer (Laravel)", company: "Jomlaa Express",
+        points: [
+          "Developed & maintained a delivery tracking system.",
+          "Built dashboards from scratch with dynamic UI conversion.",
+          "Developed complex web apps with HTML, CSS, JS & jQuery; implemented tasks in PrestaShop."
+        ]
+      },
+      {
+        date: "Nov 2021 – Jul 2022", remote: true,
+        role: "Full Stack Developer (Laravel)", company: "MagdSoft",
+        points: [
+          "Developed & maintained the Garas system and the Roznama website.",
+          "Built RESTful APIs for mobile apps using Postman."
+        ]
+      },
+      {
+        date: "Apr 2022 – Present", remote: false,
+        role: "Full Stack Web Developer", company: "El Baramegyat El Saeeda",
+        points: [
+          "Implemented multiple projects from scratch using native PHP."
+        ]
+      },
+      {
+        date: "Jun 2021 – Nov 2021", remote: true,
+        role: "Laravel Developer", company: "Sigma Tech",
+        points: [
+          "Developed complex web applications using PHP, Laravel, HTML, CSS, JS & jQuery."
+        ]
+      },
+    ],
+
+    projects: [
+      { ic: "⚖️", name: "Law Mate", tags: ["Laravel", "Paymob", "Wallet"],
+        desc: "End-to-end legal-services platform: requests, lawyer bidding, real-time chat, wallet & online payments — with a full management dashboard." },
+      { ic: "🏥", name: "ERP Clinic System", tags: ["Laravel", "Charts", "ERP"],
+        desc: "Medical management module with responsive dashboards, interactive data charts and financial reporting (returns & refunds)." },
+      { ic: "🚚", name: "Delivery Tracking System", tags: ["PHP", "jQuery", "PrestaShop"],
+        desc: "Order & delivery tracking with dashboards built from scratch and dynamic UI for a wholesale express platform." },
+      { ic: "📊", name: "Dashboard From Scratch", tags: ["Laravel", "Bootstrap"],
+        desc: "Fully custom, responsive admin dashboard built from the ground up with reusable, maintainable components." },
+      { ic: "🎓", name: "Garas — Online Schools", tags: ["Laravel", "APIs"],
+        desc: "Management system for online schools with RESTful APIs powering connected mobile applications." },
+      { ic: "🐦", name: "Twitter Simulation", tags: ["Laravel", "MySQL"],
+        desc: "A social-feed simulation app demonstrating relational data modeling, auth and CRUD flows in Laravel." },
+    ],
+
+    education: [
+      { yr: "Apr 2021", title: "Diploma in Open Source — Full Stack PHP", org: "ITI (Information Technology Institute)" },
+      { yr: "Jun 2020", title: "B.Sc. Computer & Information Technology", org: "Minya University" },
+      { yr: "Jul 2019", title: "Full Stack Web Developer Nanodegree", org: "Udacity" },
+    ],
+
+    certs: [
+      "Frontend Developer — One Million Arab Programmers",
+      "Backend Developer — One Million Arab Programmers",
+      "Web Development with Java, Python & SQL Server",
+    ],
+
+    languages: [
+      { name: "Arabic", level: "Native / Fluent", pct: 100 },
+      { name: "English", level: "Advanced", pct: 85 },
+    ],
+
+    typed: ["Laravel apps.", "REST APIs.", "ERP systems.", "clean dashboards.", "scalable products."],
+  };
+
+  /* ============ RENDER ============ */
+  const $ = (s) => document.querySelector(s);
+
+  // stats
+  $("#stats").innerHTML = DATA.stats.map(s => `
+    <div class="col-6 col-md-3 reveal">
+      <div class="stat text-center">
+        <div class="num">${s.num}</div>
+        <div class="lbl">${s.lbl}</div>
+      </div>
+    </div>`).join("");
+
+  // skills
+  $("#skills-grid").innerHTML = DATA.skills.map(s => `
+    <div class="col-md-6 col-lg-4 reveal">
+      <div class="skill-card">
+        <div class="ic">${s.ic}</div>
+        <h4>${s.title}</h4>
+        <div>${s.items.map(i => `<span class="chip">${i}</span>`).join("")}</div>
+      </div>
+    </div>`).join("");
+
+  // experience
+  $("#timeline").innerHTML = DATA.experience.map((e, i) => `
+    <div class="tl-item ${i % 2 ? "alt" : ""} reveal">
+      <div class="tl-card">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+          <span class="tl-date">${e.date}</span>
+          ${e.remote ? '<span class="remote-badge">REMOTE</span>' : '<span class="remote-badge">ON-SITE</span>'}
+        </div>
+        <h4>${e.role}</h4>
+        <div class="co">${e.company}</div>
+        <ul>${e.points.map(p => `<li>${p}</li>`).join("")}</ul>
+      </div>
+    </div>`).join("");
+
+  // projects
+  $("#projects-grid").innerHTML = DATA.projects.map(p => `
+    <div class="col-md-6 col-lg-4 reveal">
+      <div class="proj-card">
+        <div class="pic">${p.ic}</div>
+        <h4>${p.name}</h4>
+        <p>${p.desc}</p>
+        <div class="proj-tags">${p.tags.map(t => `<span class="chip">${t}</span>`).join("")}</div>
+      </div>
+    </div>`).join("");
+
+  // education
+  $("#edu-grid").innerHTML = DATA.education.map(e => `
+    <div class="col-md-4 reveal">
+      <div class="edu-card">
+        <span class="yr">${e.yr}</span>
+        <h4>${e.title}</h4>
+        <div style="color:var(--muted);font-size:.9rem">${e.org}</div>
+      </div>
+    </div>`).join("");
+
+  // certs
+  $("#certs").innerHTML = DATA.certs.map(c => `<span class="cert-pill">${c}</span>`).join("");
+
+  // languages
+  $("#languages").innerHTML = DATA.languages.map(l => `
+    <div class="lang-row"><span>${l.name}</span><span class="lvl">${l.level}</span></div>
+    <div class="lang-bar"><span data-pct="${l.pct}"></span></div>
+    <div style="height:1rem"></div>`).join("");
+
+  // year
+  $("#year").textContent = new Date().getFullYear();
+
+  /* ============ TYPING EFFECT ============ */
+  (function () {
+    const el = $("#typed"); const words = DATA.typed;
+    let w = 0, c = 0, deleting = false;
+    function tick() {
+      const word = words[w];
+      el.textContent = word.substring(0, c);
+      if (!deleting && c < word.length) { c++; }
+      else if (deleting && c > 0) { c--; }
+      else if (!deleting && c === word.length) { deleting = true; return setTimeout(tick, 1600); }
+      else { deleting = false; w = (w + 1) % words.length; }
+      setTimeout(tick, deleting ? 45 : 90);
+    }
+    tick();
+  })();
+
+  /* ============ SCROLL REVEAL ============ */
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add("in");
+        // animate language bars
+        en.target.querySelectorAll(".lang-bar > span").forEach(b => b.style.width = b.dataset.pct + "%");
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  /* ============ NAV: scrolled + active link + back to top ============ */
+  const nav = $("#nav"), toTop = $("#toTop");
+  const sections = [...document.querySelectorAll("section[id], header[id]")];
+  const links = [...document.querySelectorAll(".navbar .nav-link")];
+
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    nav.classList.toggle("scrolled", y > 30);
+    toTop.classList.toggle("show", y > 500);
+
+    let current = "";
+    sections.forEach(sec => { if (y >= sec.offsetTop - 120) current = sec.id; });
+    links.forEach(l => l.classList.toggle("active", l.getAttribute("href") === "#" + current));
+  });
+
+  toTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+
+  // close mobile menu on link click
+  links.forEach(l => l.addEventListener("click", () => {
+    const c = document.querySelector("#navmenu.show");
+    if (c) new bootstrap.Collapse(c).hide();
+  }));
+  </script>
+</body>
+</html>
