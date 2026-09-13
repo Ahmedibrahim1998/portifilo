@@ -224,6 +224,12 @@
     .proj-card h4 { font-size: 1.1rem; margin-bottom: .5rem; }
     .proj-card p { color: var(--muted); font-size: .9rem; flex: 1; }
     .proj-tags { margin-top: .9rem; }
+    .proj-link {
+      display: inline-block; margin-top: .9rem;
+      font-family: var(--mono); font-size: .8rem; color: var(--accent-2);
+      border-bottom: 1px solid transparent;
+    }
+    .proj-link:hover { color: var(--accent-2); border-bottom-color: var(--accent-2); }
 
     /* ===== education ===== */
     .edu-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem 1.5rem; height: 100%; transition: .25s; }
@@ -353,7 +359,7 @@
           <h2 class="section-title">A developer who turns ideas into <span class="accent">working products.</span></h2>
           <div class="about-card">
             <p class="mb-3" style="color:var(--text)">
-              I'm a Senior Software Full Stack PHP developer with several years of hands-on experience building and
+              I'm a Senior Software Full Stack PHP developer with 5+ years of hands-on experience building and
               maintaining production web applications across legal-tech, healthcare ERP, e-commerce and delivery
               platforms.
             </p>
@@ -465,7 +471,7 @@
   ========================================================= */
   const DATA = {
     stats: [
-      { num: "4+",  lbl: "Years of experience" },
+      { num: "5+",  lbl: "Years of experience" },
       { num: "7",   lbl: "Companies & clients" },
       { num: "10+", lbl: "Projects delivered" },
       { num: "∞",   lbl: "Lines of clean code" },
@@ -473,9 +479,9 @@
 
     skills: [
       { ic: "⚙️", title: "Languages & Frameworks",
-        items: ["PHP", "Laravel", "React.js", "Vue.js", "Angular", "JavaScript"] },
+        items: ["PHP", "Laravel", "JavaScript", "RESTful APIs"] },
       { ic: "🎨", title: "Frontend & Design",
-        items: ["HTML", "CSS", "Bootstrap", "jQuery", "Responsive UI"] },
+        items: ["React.js", "Vue.js", "Angular", "jQuery", "Bootstrap", "HTML", "CSS", "Responsive UI"] },
       { ic: "🗄️", title: "Databases",
         items: ["MySQL", "MongoDB", "Oracle", "SQLite"] },
       { ic: "🛠️", title: "Tools & DevOps",
@@ -543,8 +549,12 @@
     projects: [
       { ic: "⚖️", name: "Law Mate", tags: ["Laravel", "Paymob", "Wallet"],
         desc: "End-to-end legal-services platform: requests, lawyer bidding, real-time chat, wallet & online payments — with a full management dashboard." },
-      { ic: "🏥", name: "ERP Clinic System", tags: ["Laravel", "Charts", "ERP"],
+      { ic: "🏥", name: "ERP Clinic System — MedEuCare", tags: ["Laravel", "Charts", "ERP"],
+        link: "https://medeucare.com/",
         desc: "Medical management module with responsive dashboards, interactive data charts and financial reporting (returns & refunds)." },
+      { ic: "📖", name: "Ibn Al-Jazari — Quran Memorization Platform", tags: ["Laravel", "3 Dashboards", "EdTech"],
+        link: "https://ibn-eljezery.on-forge.com/",
+        desc: "Educational platform for a Quran memorization school: create & manage halaqat (study circles), students, teachers, attendance and memorization/revision progress — powered by three separate control panels (admin, teacher, student)." },
       { ic: "🚚", name: "Delivery Tracking System", tags: ["PHP", "jQuery", "PrestaShop"],
         desc: "Order & delivery tracking with dashboards built from scratch and dynamic UI for a wholesale express platform." },
       { ic: "📊", name: "Dashboard From Scratch", tags: ["Laravel", "Bootstrap"],
@@ -619,6 +629,7 @@
         <h4>${p.name}</h4>
         <p>${p.desc}</p>
         <div class="proj-tags">${p.tags.map(t => `<span class="chip">${t}</span>`).join("")}</div>
+        ${p.link ? `<a class="proj-link" href="${p.link}" target="_blank" rel="noopener">Live site ↗</a>` : ""}
       </div>
     </div>`).join("");
 
