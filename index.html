@@ -494,13 +494,21 @@
 
     experience: [
       {
-        date: "Jan 2025 – Present", remote: true,
+        date: "Jan 2026 – Present", remote: true,
         role: "Full Stack Developer (Laravel)", company: "Challenge Group Company",
         points: [
           "Building <strong>Law Mate</strong> — a comprehensive platform for online legal services with a robust management dashboard.",
           "Developed a Requests system (type, location, urgency, status stages & expiry) and a Bids system for lawyers (Accepted / Completed / Expired).",
           "Implemented real-time chat linking clients and lawyers per request.",
           "Integrated payments & wallet using Laravel Wallet, withdrawals/deposits and Paymob payment gateway."
+        ]
+      },
+      {
+        date: "Apr 2022 – Present", remote: false, type: "FREELANCE",
+        role: "Full Stack Web Developer (Freelance)", company: "El Baramegyat El Saeeda",
+        points: [
+          "Ongoing project-based collaboration running in parallel with my full-time roles.",
+          "Implemented multiple projects from scratch using native PHP."
         ]
       },
       {
@@ -514,7 +522,7 @@
         ]
       },
       {
-        date: "Sep 2022 – Dec 2023", remote: true,
+        date: "Sep 2022 – Dec 2024", remote: true,
         role: "Full Stack Developer (Laravel)", company: "Jomlaa Express",
         points: [
           "Developed & maintained a delivery tracking system.",
@@ -528,13 +536,6 @@
         points: [
           "Developed & maintained the Garas system and the Roznama website.",
           "Built RESTful APIs for mobile apps using Postman."
-        ]
-      },
-      {
-        date: "Apr 2022 – Present", remote: false,
-        role: "Full Stack Web Developer", company: "El Baramegyat El Saeeda",
-        points: [
-          "Implemented multiple projects from scratch using native PHP."
         ]
       },
       {
@@ -613,7 +614,7 @@
       <div class="tl-card">
         <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
           <span class="tl-date">${e.date}</span>
-          ${e.remote ? '<span class="remote-badge">REMOTE</span>' : '<span class="remote-badge">ON-SITE</span>'}
+          <span class="remote-badge">${e.type || (e.remote ? "REMOTE" : "ON-SITE")}</span>
         </div>
         <h4>${e.role}</h4>
         <div class="co">${e.company}</div>
