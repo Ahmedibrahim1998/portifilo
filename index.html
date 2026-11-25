@@ -286,6 +286,7 @@
           <li class="nav-item"><a class="nav-link" href="#experience"><span class="idx">03.</span>Experience</a></li>
           <li class="nav-item"><a class="nav-link" href="#projects"><span class="idx">04.</span>Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#education"><span class="idx">05.</span>Education</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://drive.google.com/uc?export=download&amp;id=1fYYlkuEU-j8OXJu_xY7EqYCgU_viGitF" target="_blank" rel="noopener">CV&nbsp;↓</a></li>
           <li class="nav-item ms-lg-2"><a class="nav-link" href="#contact" style="color:var(--accent)!important;border:1px solid var(--line);border-radius:8px;">Contact</a></li>
         </ul>
       </div>
@@ -307,10 +308,11 @@
           </p>
           <div class="d-flex flex-wrap gap-3 mt-4">
             <a href="#projects" class="btn-accent">View my work →</a>
+            <a href="https://drive.google.com/uc?export=download&amp;id=1fYYlkuEU-j8OXJu_xY7EqYCgU_viGitF" target="_blank" rel="noopener" class="btn-ghost">Download CV ↓</a>
             <a href="#contact" class="btn-ghost">Get in touch</a>
           </div>
           <div class="socials d-flex gap-2 mt-4">
-            <a href="mailto:a.ibrahim.software@gmail.com" title="Email" aria-label="Email">✉</a>
+            <a href="mailto:a.ibrahim.software98@gmail.com" title="Email" aria-label="Email">✉</a>
             <a href="tel:+201112716862" title="Phone" aria-label="Phone">☎</a>
             <a href="https://www.linkedin.com/in/ahmed-ibrahim-86a36b176/" title="LinkedIn" aria-label="LinkedIn">in</a>
             <a href="https://github.com/Ahmedibrahim1998" title="GitHub" aria-label="GitHub" class="mono">{}</a>
@@ -440,10 +442,13 @@
               I'm currently open to new opportunities and interesting projects. Whether you have a question or
               just want to say hi — my inbox is always open.
             </p>
-            <a href="mailto:a.ibrahim.software@gmail.com" class="btn-accent d-inline-block mb-4">Say hello ✉</a>
+            <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+              <a href="mailto:a.ibrahim.software98@gmail.com" class="btn-accent d-inline-block">Say hello ✉</a>
+              <a href="https://drive.google.com/uc?export=download&amp;id=1fYYlkuEU-j8OXJu_xY7EqYCgU_viGitF" target="_blank" rel="noopener" class="btn-ghost d-inline-block">Download CV ↓</a>
+            </div>
             <div class="d-flex flex-wrap justify-content-center gap-4 mono" style="font-size:.9rem;color:var(--muted)">
               <span>📞 +20 111 271 6862</span>
-              <span>✉ a.ibrahim.software@gmail.com</span>
+              <span>✉ a.ibrahim.software98@gmail.com</span>
               <span>📍 Cairo, Egypt</span>
             </div>
           </div>
@@ -479,28 +484,31 @@
 
     skills: [
       { ic: "⚙️", title: "Languages & Frameworks",
-        items: ["PHP", "Laravel", "JavaScript", "RESTful APIs"] },
-      { ic: "🎨", title: "Frontend & Design",
-        items: ["React.js", "Vue.js", "Angular", "jQuery", "Bootstrap", "HTML", "CSS", "Responsive UI"] },
+        items: ["PHP", "Laravel", "Filament", "Livewire", "JavaScript", "RESTful APIs"] },
+      { ic: "🎨", title: "Frontend",
+        items: ["React.js", "Vue.js", "jQuery", "Bootstrap", "Tailwind", "HTML", "CSS"] },
       { ic: "🗄️", title: "Databases",
-        items: ["MySQL", "MongoDB", "Oracle", "SQLite"] },
-      { ic: "🛠️", title: "Tools & DevOps",
-        items: ["Git", "GitHub Actions", "Docker", "Postman", "Ubuntu"] },
-      { ic: "🖧", title: "Server Administration",
-        items: ["Apache Server", "Redhat Linux"] },
+        items: ["MySQL", "SQLite", "MongoDB"] },
+      { ic: "🧪", title: "Testing & Quality",
+        items: ["Pest", "PHPUnit", "TDD"] },
+      { ic: "🛠️", title: "DevOps & Tools",
+        items: ["Git", "GitHub Actions", "CircleCI", "Docker", "AWS (S3, ECR)", "Postman", "Linux", "Apache"] },
+      { ic: "💳", title: "Payments & Auth",
+        items: ["Laravel Wallet (Bavix)", "Paymob", "Laravel Sanctum"] },
       { ic: "🧠", title: "Concepts & Methodologies",
-        items: ["SOLID", "Design Patterns", "OOP", "Algorithms", "Agile"] },
+        items: ["SOLID", "Design Patterns", "OOP", "Queues & Jobs", "Agile"] },
     ],
 
     experience: [
       {
         date: "Jan 2026 – Present", remote: true,
-        role: "Full Stack Developer (Laravel)", company: "Challenge Group Company",
+        role: "Senior Full Stack Developer (Laravel)", company: "Challenge Group Company",
         points: [
-          "Building <strong>Law Mate</strong> — a comprehensive platform for online legal services with a robust management dashboard.",
-          "Developed a Requests system (type, location, urgency, status stages & expiry) and a Bids system for lawyers (Accepted / Completed / Expired).",
-          "Implemented real-time chat linking clients and lawyers per request.",
-          "Integrated payments & wallet using Laravel Wallet, withdrawals/deposits and Paymob payment gateway."
+          "Built the payment & wallet layer for <strong>Law Mate</strong>, a legal-services marketplace — escrow holds (Bavix Laravel Wallet), Paymob integration and atomic, row-locked transfers that keep balances reconciled to zero across completion, refund and dispute flows.",
+          "Designed a shared working-calendar & due-date validation engine (Cairo time, public holidays, DST-safe) governing request deadlines.",
+          "Implemented admin dispute-resolution workflows (full refund, payout, partial settlement) as atomic, idempotent and fully-audited transactions.",
+          "Integrated Firebase Cloud Messaging (FCM) push notifications and built admin dashboards with Filament.",
+          "Maintained a 470+ test suite (Pest) with CI/CD on CircleCI (Docker build → AWS ECR)."
         ]
       },
       {
